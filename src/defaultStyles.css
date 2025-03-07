@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Honk&family=Luckiest+Guy&family=Monofett&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Puddles&family=Schoolbell&family=Sixtyfour+Convergence&family=Titan+One&display=swap');
+
+body {
+    background-image: url(https://muralsyourway.vtexassets.com/arquivos/ids/236286/Tropical-Beach-At-Sunset-Mural-Wallpaper.jpg?v=638164405127130000);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0px;
+}
+
+.city_selector {
+    border: 1px solid black;
+    resize: horizontal;
+    max-width: 400px;
+    width: 90vw;
+    height: 15vh;
+    position: relative;
+    top: 15vh;
+    border-radius: 10px;
+    background-color: rgba(255, 228, 196, 0.781);
+}
+
+#city {
+    height: 3vh;
+    border-radius: 5px;
+    width: 72%;
+    flex: 1;
+}
+
+.current_city {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-weight: 800;
+    text-decoration: underline;
+    text-shadow:
+        -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
+}
+
+#long-lat {
+    position: fixed;
+    top: 3.5vh
+}

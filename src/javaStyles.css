@@ -1,0 +1,44 @@
+
+#time{
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#date {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.city-time {
+    text-align: center;
+    position: relative;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(1, 1, 75, 0.342);
+    color: aliceblue;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: rgba(1, 1, 75, 0.342);
+    font-family: 'Roboto', sans-serif;
+}
+
+.city-search {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 1.5vh;
+}
+
+#city_input {
+    height: 3vh;  
+}
+.searchBtn {
+    margin: 4px;
+    height: 3vh;
+}
+
+.day-forcast {
+    border: 2px solid black;
+    height: 20vh;
+}
