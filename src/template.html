@@ -6,16 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="current_city"><p id="city" id="zipcode"></p> &nbsp 
-    <p id="zipcode"></p></div>
-    <div class="current_city" id="long-lat"><p id="location"></p></div>
-    <div class="city_selector">
-        <div class="city-time">
-            <p id="time"></p> &nbsp &nbsp
-            <p id="date"></p></div>
-            <div class="city-search"><input type="text" id="city_input" placeholder="Enter city name">
-            <button class="searchBtn">Search</button></div>    
+    <div class="head-text">
+        <div id="city-zip">
+            <div id="city"></div>,
+            <div id="zipcode"></div>
+        </div>
+    <p id="location"></p></div>
+
+    <div class="change-city">
+        <div class="time-date">
+            <p id="date"></p>
+            <p id="time"></p>
+        </div>
+        <input type="text" id="city_input" placeholder="Enter city name">
+        <button id="searchBtn">Search</button>
+    </div>    
+    <div class="weather-display">
     </div>
-    <div id="day-forcast"></div>
 </body>
 </html>

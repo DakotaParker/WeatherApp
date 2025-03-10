@@ -51,45 +51,55 @@ async function getLocation() {
 
 // This function is for displaying user time and date based on location but can be changed based on the location a user inputs
 
-async function getUserTime() {
+async function getUserTime(timeZoneOverride = null) {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(async (position) => {
             try {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
 
-                const response = await fetch(`https://worldtimeapi.org/api/ip`);
-                const data = await response.json();
+                let timeZone = timeZoneOverride;  
 
-                const timeZone = data.timezone;
+                if (!timeZone) {
+                    const response = await fetch(`https://worldtimeapi.org/api/ip`);
+                    if (!response.ok) throw new Error("Failed to fetch time zone.");
+                    const data = await response.json();
+                    timeZone = data.timezone || "UTC";  
+                }
 
-                function updateTime() {         //Currently set to certain time zone needs to have the ability to be changed based on location requested by user
-                    const now = new Date();
-                    const localTime = now.toLocaleTimeString("en-US", { timeZone: timeZone,
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true
-                    });
-                    const localDate = now.toLocaleDateString("en-US", { timeZone: timeZone });
+                function updateTime() {
+                    try {
+                        const now = new Date();
+                        const localTime = now.toLocaleTimeString("en-US", {
+                            timeZone: timeZone,
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                        });
+                        const localDate = now.toLocaleDateString("en-US", { timeZone: timeZone });
 
-                    document.getElementById("time").textContent = `${localTime}`;
-                    document.getElementById("date").textContent = `${localDate}`;
+                        document.getElementById("time").textContent = `${localTime}`;
+                        document.getElementById("date").textContent = `${localDate}`;
+                    } catch (error) {
+                        console.error("Error updating time:", error);
+                        document.getElementById("time").textContent = "Error updating time.";
+                        document.getElementById("date").textContent = "Error updating date.";
+                    }
                 }
 
                 updateTime();
-                setInterval(updateTime, 60000);
+                setInterval(updateTime, 1000);
 
             } catch (error) {
                 console.error("Error fetching time and date:", error);
-                document.getElementById("time").textContent = "Unable to retrieve time due to location handler not updating.";
-                document.getElementById("date").textContent = "Unable to retrieve date due to location handler not updating";
+                document.getElementById("time").textContent = "Unable to retrieve time.";
+                document.getElementById("date").textContent = "Unable to retrieve date.";
             }
-        },
-        (error) => {
+        }, (error) => {
             console.error("Geolocation error:", error);
             document.getElementById("time").textContent = "Location access denied.";
             document.getElementById("date").textContent = "Location access denied.";
-        });
+        }, { timeout: 10000 }); // Timeout for geolocation
     } else {
         document.getElementById("time").textContent = "Geolocation not supported.";
         document.getElementById("date").textContent = "Geolocation not supported.";
@@ -100,6 +110,5 @@ async function getUserTime() {
 
 
 
-export {getUserTime};
-export {getLocation};
-export {getWeather};
+export {getUserTime, getLocation, getWeather};
+

@@ -4,5 +4,6 @@ import {} from "./functionality.js";
 import "./defaultStyles.css";
 import "./javaStyles.css";
 
-getLocation();
-getUserTime();
+getWeather();
+await getLocation();
+await getUserTime();
