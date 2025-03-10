@@ -12,12 +12,53 @@ async function sevenDays() {
     return sevenDays;
 }
 
-function sevenDaysBoxes() {
-    let weatherDisplay = document.querySelector(".weather-display");
+async function sevenDaysBoxes() {
+    let weatherDisplay = document.querySelector(".sevenDays");
+    const daysArray = await sevenDays();
     
-    for(let i = 0; i < 7; i++){ 
-        const dayDiv = document.createElement("div");
-        dayDiv.classList.add("day");
-        weatherDisplay.appendChild(dayDiv);
-    }
+    daysArray.forEach((day) => {
+    const dayDiv = document.createElement("div");
+    dayDiv.textContent = day;
+    dayDiv.classList.add("day");
+    weatherDisplay.appendChild(dayDiv);
+    });
 }
+//sevenDays scrollable boxes
+let enableDragScroll = () => {
+    const container = document.querySelector(".sevenDays");
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    const mouseDownHandler = (e) => {
+        isDown = true;
+        container.classList.add("active");
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+    };
+
+    const mouseLeaveHandler = () => {
+        isDown = false;
+        container.classList.remove("active");
+    };
+
+    const mouseUpHandler = () => {
+        isDown = false;
+        container.classList.remove("active");
+    };
+
+    const mouseMoveHandler = (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 3; 
+        container.scrollLeft = scrollLeft - walk;
+    };
+
+    container.addEventListener("mousedown", mouseDownHandler);
+    container.addEventListener("mouseleave", mouseLeaveHandler);
+    container.addEventListener("mouseup", mouseUpHandler);
+    container.addEventListener("mousemove", mouseMoveHandler);
+}
+
+export { sevenDaysBoxes, sevenDays, enableDragScroll };

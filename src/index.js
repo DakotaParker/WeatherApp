@@ -1,9 +1,14 @@
-import { getLocation, getUserTime } from "./apiHandler.js";
-import {getWeather} from "./apiHandler.js";
-import {} from "./functionality.js";
+import { getLocation, getUserTime, getWeather } from "./apiHandler.js";
+import { sevenDaysBoxes, sevenDays, enableDragScroll } from "./functionality.js";
 import "./defaultStyles.css";
 import "./javaStyles.css";
+
+
 
 getWeather();
 await getLocation();
 await getUserTime();
+document.addEventListener('DOMContentLoaded', () => {
+    sevenDaysBoxes();
+});
+enableDragScroll();
