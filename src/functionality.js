@@ -21,9 +21,15 @@ async function sevenDaysBoxes() {
     dayDiv.textContent = day;
     dayDiv.classList.add("day");
     weatherDisplay.appendChild(dayDiv);
+    
+    const innerDiv = document.createElement("div");
+    innerDiv.textContent = `Details for ${day}`;
+    innerDiv.classList.add("innerDay");
+    dayDiv.appendChild(innerDiv);
+
     });
 }
-//sevenDays scrollable boxes
+//sevenDays scrollable boxes x-axis
 let enableDragScroll = () => {
     const container = document.querySelector(".sevenDays");
     let isDown = false;
@@ -61,4 +67,44 @@ let enableDragScroll = () => {
     container.addEventListener("mousemove", mouseMoveHandler);
 }
 
-export { sevenDaysBoxes, sevenDays, enableDragScroll };
+// Day of the week scrollable boxes y-axis
+let enableDragScrollY = () => {
+    const containers = document.querySelectorAll(".innerDay");
+    containers.forEach(container => {
+        let isDown = false;
+        let startY;
+        let scrollTop;
+
+        const mouseDownHandler = (e) => {
+            isDown = true;
+            container.classList.add("active");
+            startY = e.pageY - container.offsetTop;
+            scrollTop = container.scrollTop;
+        };
+
+        const mouseLeaveHandler = () => {
+            isDown = false;
+            container.classList.remove("active");
+        };
+
+        const mouseUpHandler = () => {
+            isDown = false;
+            container.classList.remove("active");
+        };
+
+        const mouseMoveHandler = (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const y = e.pageY - container.offsetTop;
+            const walk = (y - startY) * 3; 
+            container.scrollTop = scrollTop - walk;
+        };
+
+        container.addEventListener("mousedown", mouseDownHandler);
+        container.addEventListener("mouseleave", mouseLeaveHandler);
+        container.addEventListener("mouseup", mouseUpHandler);
+        container.addEventListener("mousemove", mouseMoveHandler);
+    });
+}
+
+export { sevenDaysBoxes, sevenDays, enableDragScroll, enableDragScrollY };

@@ -6,24 +6,34 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="head-text">
-        <div id="city-zip">
-            <div id="city"></div>,
-            <div id="zipcode"></div>
-        </div>
-    <p id="location"></p></div>
+    <div id="loading" class="loader-container">
+        <div class="loader"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
 
-    <div class="change-city">
-        <div class="time-date">
-            <p id="date"></p>
-            <p id="time"></p>
+    <div id="content" style="display: none;">
+        <div class="head-text">
+            <div id="city-zip">
+                <div id="city"></div>,
+                <div id="zipcode"></div>
+            </div>
+            <p id="location"></p>
         </div>
-        <input type="text" id="city_input" placeholder="Enter city name">
-        <button id="searchBtn">Search</button>
-    </div>    
-    <div class="weather-display">
-        <div class="weather-head">7-Day Forcast</div>
-        <div class="sevenDays"></div>
+
+        <div class="change-city">
+            <div class="time-date">
+                <p id="date"></p>
+                <p id="time"></p>
+            </div>
+            <input type="text" id="city_input" placeholder="Enter city name">
+            <button id="searchBtn">Search</button>
+        </div>    
+
+        <div class="weather-display">
+            <div class="weather-head">7-Day Forecast</div>
+            <div class="sevenDays"></div>
+        </div>
     </div>
+
 </body>
 </html>

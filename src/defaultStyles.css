@@ -84,6 +84,53 @@ body {
         width: 50.5vw; 
     }
 }
-
+/* LOADING WHEEL WHEN PAGE IS LOADING*/
+.loader {
+    border: 12px solid rgb(255, 255, 255);
+    border-top: 12px solid #3498db;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1.5s linear infinite;
+    position: absolute;
+    box-shadow: 0 0 0 2px black, inset 0 0 0 2px black;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: absolute;
+    top: 30vh;
+  }
+  .loader-text {
+    margin-top: 15px;
+    font-size: 1.5rem;
+    position: relative;
+    text-align: center;
+    top: 10vh;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+#content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+}
 
 
