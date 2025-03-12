@@ -6,12 +6,21 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        body{
+        background-image: url(https://muralsyourway.vtexassets.com/arquivos/ids/236286/Tropical-Beach-At-Sunset-Mural-Wallpaper.jpg?v=638164405127130000);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        }
+    </style>
+    
     <div id="loading" class="loader-container">
         <div class="loader"></div>
         <div class="loader-text">Loading...</div>
       </div>
 
-    <div id="content" style="display: none;">
+      <div id="content">
         <div class="head-text">
             <div id="city-zip">
                 <div id="city"></div>,
@@ -25,12 +34,11 @@
                 <p id="date"></p>
                 <p id="time"></p>
             </div>
-            <input type="text" id="city_input" placeholder="Enter city name">
-            <button id="searchBtn">Search</button>
+            
         </div>    
 
         <div class="weather-display">
-            <div class="weather-head">7-Day Forecast</div>
+            
             <div class="sevenDays"></div>
         </div>
     </div>

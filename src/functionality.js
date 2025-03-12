@@ -69,42 +69,43 @@ let enableDragScroll = () => {
 
 // Day of the week scrollable boxes y-axis
 let enableDragScrollY = () => {
-    const containers = document.querySelectorAll(".innerDay");
-    containers.forEach(container => {
-        let isDown = false;
-        let startY;
-        let scrollTop;
+    const container = document.querySelector(".innerDay");
+    let isDown = false;
+    let startY;
+    let scrollTop;
 
-        const mouseDownHandler = (e) => {
-            isDown = true;
-            container.classList.add("active");
-            startY = e.pageY - container.offsetTop;
-            scrollTop = container.scrollTop;
-        };
+    const mouseDownHandler = (e) => {
+        isDown = true;
+        container.classList.add("active");
+        startY = e.pageY - container.offsetTop;
+        scrollTop = container.scrollTop;
+    };
 
-        const mouseLeaveHandler = () => {
-            isDown = false;
-            container.classList.remove("active");
-        };
+    const mouseLeaveHandler = () => {
+        isDown = false;
+        container.classList.remove("active");
+    };
 
-        const mouseUpHandler = () => {
-            isDown = false;
-            container.classList.remove("active");
-        };
+    const mouseUpHandler = () => {
+        isDown = false;
+        container.classList.remove("active");
+    };
 
-        const mouseMoveHandler = (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const y = e.pageY - container.offsetTop;
-            const walk = (y - startY) * 3; 
-            container.scrollTop = scrollTop - walk;
-        };
+    const mouseMoveHandler = (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const y = e.pageY - container.offsetTop;
+        const walk = (y - startY) * 3; 
+        container.scrollTop = scrollTop - walk;
+    };
 
-        container.addEventListener("mousedown", mouseDownHandler);
-        container.addEventListener("mouseleave", mouseLeaveHandler);
-        container.addEventListener("mouseup", mouseUpHandler);
-        container.addEventListener("mousemove", mouseMoveHandler);
-    });
+    container.addEventListener("mousedown", mouseDownHandler);
+    container.addEventListener("mouseleave", mouseLeaveHandler);
+    container.addEventListener("mouseup", mouseUpHandler);
+    container.addEventListener("mousemove", mouseMoveHandler);
 }
 
-export { sevenDaysBoxes, sevenDays, enableDragScroll, enableDragScrollY };
+
+
+
+export { sevenDaysBoxes, sevenDays, enableDragScroll, enableDragScrollY};
