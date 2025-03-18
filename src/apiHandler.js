@@ -1,4 +1,4 @@
-
+import { sevenDays } from "./functionality.js";
 // Funtion that loads the current weather data for the location the user is in and displays it on the page
 
 async function getLocation() {
@@ -51,18 +51,18 @@ async function getUserTime(timeZoneOverride = null) {
                     let timeZone = timeZoneOverride;  
                     if (!timeZone) {
                         try {
-                            // Fetch time zone info from the API.
+                            
                             const response = await fetch(`https://worldtimeapi.org/api/ip`);
                             if (!response.ok) throw new Error("Failed to fetch time zone.");
                             const data = await response.json();
                             timeZone = data.timezone || "UTC";
                         } catch (error) {
                             console.error("Error fetching time zone:", error);
-                            timeZone = "UTC"; // Fallback
+                            timeZone = "UTC"; 
                         }
                     }
                     const now = new Date();
-                    // Update time and date using the fetched time zone.
+                    
                     document.getElementById("time").textContent = now.toLocaleTimeString("en-US", { timeZone });
                     document.getElementById("date").textContent = now.toLocaleDateString("en-US", { timeZone });
                     resolve();
@@ -72,14 +72,14 @@ async function getUserTime(timeZoneOverride = null) {
                 }
             }, (error) => {
                 console.error("Geolocation error in time function:", error);
-                // Fallback to UTC if geolocation fails.
+                
                 const now = new Date();
                 document.getElementById("time").textContent = now.toLocaleTimeString("en-US", { timeZone: "UTC" });
                 document.getElementById("date").textContent = now.toLocaleDateString("en-US", { timeZone: "UTC" });
                 resolve();
             });
         } else {
-            // Fallback if geolocation is not supported.
+            
             const now = new Date();
             document.getElementById("time").textContent = now.toLocaleTimeString("en-US", { timeZone: "UTC" });
             document.getElementById("date").textContent = now.toLocaleDateString("en-US", { timeZone: "UTC" });
@@ -102,7 +102,7 @@ async function getWeather(location) {
             }
             const data = await response.json();
             console.log("Weather data:", data);
-            // Here you would update your weather UI.
+            
             return data;
         } catch (error) {
             console.error(`Attempt ${retries} failed:`, error);
@@ -110,8 +110,39 @@ async function getWeather(location) {
             if (retries >= maxRetries) {
                 console.error('Failed to fetch weather data');
                 throw error;
+            
             }
-        }
+        }                
+    }
+}
+    async function displayWeather() {
+        console.log("Received data:");
+        const forecast = await sevenDays(); // Assuming `sevenDays` is a function returning forecast data
+        const weatherContainer = document.getElementById("weatherContainer");
+        // Clear any existing content
+
+    // Check if forecast is defined and is an array
+    if (Array.isArray(forecast) && forecast.length > 0) {
+        forecast.slice(0, 7).forEach((day, index) => {
+            const date = new Date(day.datetime).toDateString();
+            const temp = day.temp;
+            const description = day.conditions;
+            const icon = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/icons/${day.icon}.png`;
+
+            const weatherCard = document.createElement('div');
+            weatherCard.classList.add('weather-card');
+            weatherCard.innerHTML = `
+                <div><strong>Day ${index + 1} (${date})</strong></div>
+                <p>Temp: ${temp}°F</p>
+                <p>Description: ${description}</p>
+                <img src="${icon}" alt="${description}" />
+            `;
+
+            weatherContainer.appendChild(weatherCard);
+        });
+    } else {
+        console.error("Forecast data is unavailable or not in the expected format.");
+        weatherContainer.innerHTML = '<p>Weather data is unavailable at this time.</p>';
     }
 }
 
@@ -120,4 +151,4 @@ async function getWeather(location) {
 
 
 
-export { getUserTime, getLocation, getWeather };
+export { getUserTime, getLocation, getWeather, displayWeather };

@@ -140,5 +140,10 @@ html, body {
     overflow-x: hidden;
     box-sizing: border-box;
 }
+.newsArticles{
+    display: flex;
+    height: 50%;
+    width: 100%;
+}
 
 

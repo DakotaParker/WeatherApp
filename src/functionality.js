@@ -3,6 +3,9 @@
 async function sevenDays() {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const today = new Date();
+    if (isNaN(today.getTime())) {
+        throw new Error("Invalid Date object");
+    }
     const todayIndex = today.getDay();
     const sevenDays = [];
     for (let i = 0; i < 7; i++) {
@@ -14,22 +17,27 @@ async function sevenDays() {
 
 async function sevenDaysBoxes() {
     let weatherDisplay = document.querySelector(".sevenDays");
-    const daysArray = await sevenDays();
-    
-    daysArray.forEach((day) => {
-    const dayDiv = document.createElement("div");
-    dayDiv.textContent = day;
-    dayDiv.classList.add("day");
-    weatherDisplay.appendChild(dayDiv);
-    
-    const innerDiv = document.createElement("div");
-    innerDiv.textContent = `Details for ${day}`;
-    innerDiv.classList.add("innerDay");
-    dayDiv.appendChild(innerDiv);
+    weatherDisplay.innerHTML = ''; // Clear previous days before appending new ones
 
+    const daysArray = await sevenDays();
+
+    return new Promise((resolve) => { 
+        daysArray.forEach((day) => {
+            const dayDiv = document.createElement("div");
+            dayDiv.textContent = day;
+            dayDiv.classList.add("day");
+            weatherDisplay.appendChild(dayDiv);
+
+            const innerDiv = document.createElement("div");
+            innerDiv.textContent = `Details for ${day}`;
+            innerDiv.classList.add("innerDay");
+            dayDiv.appendChild(innerDiv);
+        });
+
+        resolve(); 
     });
 }
-//sevenDays scrollable boxes x-axis
+
 let enableDragScroll = () => {
     const container = document.querySelector(".sevenDays");
     let isDown = false;
@@ -104,7 +112,9 @@ let enableDragScrollY = () => {
     container.addEventListener("mouseup", mouseUpHandler);
     container.addEventListener("mousemove", mouseMoveHandler);
 }
-
+// end of page articles
+ 
+     
 
 
 

@@ -12,12 +12,23 @@ function appendContent() {
         searchBtn.textContent = "Search";
         searchBtn.id = 'searchBtn';
         changeCity.appendChild(searchBtn);
+        
+        let weatherDisplay = document.querySelector('.weather-display');
+            const weatherHead = document.createElement('div');
+            weatherHead.textContent = "7-Day Forcast";
+            weatherHead.className = "weather-head";
+            weatherDisplay.appendChild(weatherHead);
+            weatherDisplay.insertBefore(weatherHead, weatherDisplay.firstChild);
 
-    let weatherDisplay = document.querySelector('.weather-display');
-        const weatherHead = document.createElement('div');
-        weatherHead.textContent = "7-Day Forcast";
-        weatherHead.className = "weather-head";
-        weatherDisplay.appendChild(weatherHead);        
+        let weatherNews = document.querySelector('#weather-news');
+            const liveWeatherNews = document.createElement('h2');
+            liveWeatherNews.textContent = 'Live Weather Today!'
+            const listOfLinks = document.createElement('ul');
+            listOfLinks.id = 'news-list';
+            weatherNews.appendChild(liveWeatherNews);
+            weatherNews.appendChild(listOfLinks);
+        
+
 }
 
 export {appendContent}

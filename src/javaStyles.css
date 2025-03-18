@@ -61,6 +61,17 @@
 }
 .innerDay.active {
     cursor: grabbing;
-    
+}
+#news-list{
+    display: none;
+}
+.weatherCard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(118, 118, 252, 0.781);
 }
 
